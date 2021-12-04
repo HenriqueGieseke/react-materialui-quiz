@@ -7,12 +7,18 @@ const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
   },
   navTitle: {
-    fontSize: '2rem',
+    fontSize: '1.6rem',
   },
   link: {
     color: '#fff',
     cursor: 'pointer',
     fontSize: '1rem',
+  },
+  logoContainer: {
+    display: 'flex',
+    gap: '0.2rem',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 }));
 

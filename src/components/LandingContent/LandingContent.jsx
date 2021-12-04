@@ -16,16 +16,15 @@ const LandingContent = () => {
       <div className={classes.headerContainer}>
         <Container maxWidth="sm">
           <Typography align="center" variant="h4" gutterBottom>
-            General Knowledge quiz
+            Nerd Quiz
           </Typography>
           <Typography
-            variant="h6"
+            variant="subtitle1"
             align="center"
             color="textSecondary"
             paragraph
           >
-            Fun questions of general topics and nerd trivia to challenge your
-            knowledge
+            Fun questions of nerd trivia to challenge your knowledge
           </Typography>
         </Container>
       </div>

@@ -7,6 +7,9 @@ const useStyles = makeStyles((theme) => ({
   button: {
     marginBottom: '2rem',
   },
+  modal: {
+    overflow: 'scroll',
+  },
 }));
 
 export default useStyles;

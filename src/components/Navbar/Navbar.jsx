@@ -1,4 +1,5 @@
 import { AppBar, Toolbar, Typography, Link } from '@material-ui/core';
+import ContactSupportIcon from '@material-ui/icons/ContactSupport';
 import React from 'react';
 import useStyles from './styles';
 
@@ -8,9 +9,12 @@ const Navbar = () => {
   return (
     <AppBar position="relative">
       <Toolbar className={classes.navContainer}>
-        <Typography className={classes.navTitle} variant="h1">
-          Wa Project Quiz
-        </Typography>
+        <div className={classes.logoContainer}>
+          <ContactSupportIcon />
+          <Typography className={classes.navTitle} variant="h1">
+            Nerd Quiz
+          </Typography>
+        </div>
         <Link className={classes.link} to="#">
           Quiz Reports
         </Link>

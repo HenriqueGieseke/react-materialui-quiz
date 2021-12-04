@@ -4,7 +4,7 @@ import LandingContent from '../LandingContent/LandingContent';
 import QuizForm from '../QuizForm/QuizForm';
 
 const HomeContent = () => {
-  return <QuizForm />;
+  return <LandingContent />;
 };
 
 export default HomeContent;
