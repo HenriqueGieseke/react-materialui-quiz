@@ -16,7 +16,7 @@ const Navbar = () => {
           </Typography>
         </div>
         <Link className={classes.link} to="#">
-          Quiz Reports
+          Quiz Results
         </Link>
       </Toolbar>
     </AppBar>

@@ -2,7 +2,8 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
   resultsContainer: {
-    width: '18rem',
+    width: '90%',
+    maxWidth: '18rem',
     padding: theme.spacing(3, 4, 3),
     backgroundColor: theme.palette.background.paper,
     borderRadius: '10px',

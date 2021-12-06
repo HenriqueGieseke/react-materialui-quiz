@@ -4,8 +4,10 @@ import useStyles from './styles';
 import QuestionBox from '../QuestionBox/QuestionBox';
 import ResultsModal from '../ResultsModal/ResultsModal';
 
-const QuizForm = () => {
+const QuizForm = ({ setShowQuiz, questions }) => {
   const classes = useStyles();
+
+  console.log(questions);
 
   const [modalToggle, setModalToggle] = useState(false);
 
@@ -20,7 +22,14 @@ const QuizForm = () => {
       </Typography>
 
       <Container align="center">
-        <Button className={classes.button} variant="contained" color="primary">
+        <Button
+          onClick={() => {
+            setShowQuiz(false);
+          }}
+          className={classes.button}
+          variant="contained"
+          color="primary"
+        >
           Cancel
         </Button>
         <QuestionBox />

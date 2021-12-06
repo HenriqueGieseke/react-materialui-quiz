@@ -7,7 +7,7 @@ const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
   },
   navTitle: {
-    fontSize: '1.6rem',
+    fontSize: '1.5rem',
   },
   link: {
     color: '#fff',

@@ -12,7 +12,7 @@ const ResultsModal = () => {
         Results
       </Typography>
       <Typography gutterBottom color="textSecondary" variant="subtitle1">
-        This results are saved in the Quiz Reports section
+        These results are saved in the Quiz Reports section
       </Typography>
       <Card
         align="start"

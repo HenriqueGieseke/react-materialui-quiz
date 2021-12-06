@@ -11,6 +11,7 @@ const QuizReportContent = () => {
   const modalToggle = () => {
     setModalStatus(!modalStatus);
   };
+
   return (
     <main>
       <Typography className={classes.title} align="center" variant="h4">
