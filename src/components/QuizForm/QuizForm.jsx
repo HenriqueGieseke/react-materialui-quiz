@@ -1,19 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { Button, Container, Modal, Typography } from '@material-ui/core';
 import useStyles from './styles';
 import QuestionBox from '../QuestionBox/QuestionBox';
 import ResultsModal from '../ResultsModal/ResultsModal';
+import { Context } from '../../Context/Context';
+import { handleSubmitAnswers } from '../../helpers/handleSubmitAnswers';
 
 const QuizForm = ({ setShowQuiz, questions }) => {
   const classes = useStyles();
 
-  console.log(questions);
+  console.log('perguntas ', questions);
+
+  const { answers, setAnswers } = useContext(Context);
 
   const [modalToggle, setModalToggle] = useState(false);
+  const [questionsLength] = useState(questions.length);
+  const [answerLength, setAnswerLength] = useState(0);
 
-  const changeToggle = () => {
-    setModalToggle(!modalToggle);
-  };
+  console.log('CONTEXT ', answers);
 
   return (
     <main>
@@ -25,6 +29,8 @@ const QuizForm = ({ setShowQuiz, questions }) => {
         <Button
           onClick={() => {
             setShowQuiz(false);
+            setAnswerLength(0);
+            setAnswers([]);
           }}
           className={classes.button}
           variant="contained"
@@ -32,26 +38,54 @@ const QuizForm = ({ setShowQuiz, questions }) => {
         >
           Cancel
         </Button>
-        <QuestionBox />
-        <QuestionBox />
-        <QuestionBox />
-
-        <Button
-          onClick={changeToggle}
-          className={classes.button}
-          variant="contained"
-          color="primary"
+        <form
+          onSubmit={(event) => {
+            handleSubmitAnswers(
+              event,
+              answers,
+              setAnswers,
+              setModalToggle,
+              modalToggle
+            );
+          }}
         >
-          Finish
-        </Button>
+          {questions.map((question) => (
+            <QuestionBox
+              key={question.question}
+              questionData={question}
+              questionNumber={questions.indexOf(question) + 1}
+              setAnswerLength={setAnswerLength}
+            />
+          ))}
+          <Button
+            disabled={questionsLength === answerLength ? false : true}
+            type="submit"
+            className={classes.button}
+            variant="contained"
+            color="primary"
+          >
+            Finish
+          </Button>
+        </form>
       </Container>
       <Modal
         className={classes.modal}
         open={modalToggle}
-        onClose={changeToggle}
+        onClose={() => {
+          setModalToggle(false);
+          setShowQuiz(false);
+          setAnswerLength(0);
+          setAnswers([]);
+        }}
         align="center"
       >
-        <ResultsModal />
+        <ResultsModal
+          answers={answers}
+          setModalToggle={setModalToggle}
+          setShowQuiz={setShowQuiz}
+          setAnswerLength={setAnswerLength}
+          setAnswers={setAnswers}
+        />
       </Modal>
     </main>
   );

@@ -1,9 +1,16 @@
 import { Container, Typography, Card, Button } from '@material-ui/core';
-import React from 'react';
-import QuestionBox from '../QuestionBox/QuestionBox';
+import React, { useContext } from 'react';
+import { Context } from '../../Context/Context';
+import ResultsQuestionBox from '../ResultsQuestionBox/ResultsQuestionBox';
 import useStyles from './styles';
 
-const ResultsModal = () => {
+const ResultsModal = ({
+  answers,
+  setModalToggle,
+  setShowQuiz,
+  setAnswerLength,
+  setAnswers,
+}) => {
   const classes = useStyles();
 
   return (
@@ -20,21 +27,25 @@ const ResultsModal = () => {
         className={classes.resultsContainer}
       >
         <Typography gutterBottom variant="subtitle2">
-          Correct answers: 4
+          Correct answers: {answers[1].correct}
         </Typography>
         <Typography gutterBottom variant="subtitle2">
-          Incorrect answers: 5
+          Incorrect answers: {answers[1].wrong}
         </Typography>
       </Card>
-      <QuestionBox />
-      <QuestionBox />
-      <QuestionBox />
-      <QuestionBox />
-      <QuestionBox />
-      <QuestionBox />
-      <QuestionBox />
-      <QuestionBox />
-      <Button variant="contained" color="primary">
+      {answers[0].map((answer) => (
+        <ResultsQuestionBox key={answer.description} answerData={answer} />
+      ))}
+      <Button
+        onClick={() => {
+          setModalToggle(false);
+          setShowQuiz(false);
+          setAnswerLength(0);
+          setAnswers([]);
+        }}
+        variant="contained"
+        color="primary"
+      >
         Home
       </Button>
     </Container>

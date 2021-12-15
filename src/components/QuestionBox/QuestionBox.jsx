@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import {
   Card,
   CardActions,
@@ -8,45 +8,57 @@ import {
   RadioGroup,
   Typography,
 } from '@material-ui/core';
+
 import useStyles from './styles';
+import { groupAnswers } from '../../helpers/groupAnswers';
+import { Context } from '../../Context/Context';
+import { handleAnswerSelection } from '../../helpers/handleAnswerSelection';
 
-const QuestionBox = () => {
+const QuestionBox = ({ questionData, questionNumber, setAnswerLength }) => {
+  const [correctAnswer] = useState(questionData.correct_answer);
+  const [groupedAnswers] = useState(
+    groupAnswers(questionData.correct_answer, questionData.incorrect_answers)
+  );
+
+  const { answers, setAnswers } = useContext(Context);
+
   const classes = useStyles();
-
   return (
     <Card align="start" variant="outlined" className={classes.card}>
       <CardContent>
         <Typography color="textSecondary" variant="h6" component="h2">
-          Question 1
+          Question {questionNumber}
         </Typography>
         <Typography color="textSecondary" gutterBottom>
-          Which of the following colors does the Zombie eyes glow in the
-          &quot;Nuketown&quot; map in &quot;Call of Duty: Black Ops II&quot;
-          Zombies mode?
+          {questionData.question}
         </Typography>
       </CardContent>
       <CardActions>
-        <RadioGroup aria-label="Opções" name="Opções">
-          <FormControlLabel
-            control={<Radio />}
-            label="Yellow and Blue"
-            value="Yellow and Blue"
-          />
-          <FormControlLabel
-            control={<Radio />}
-            label="Yellow and Red"
-            value="Yellow and Red"
-          />
-          <FormControlLabel
-            control={<Radio />}
-            label="Red and Blue"
-            value="Red and Blue"
-          />
-          <FormControlLabel
-            control={<Radio />}
-            label="Blue and White"
-            value="Blue and White"
-          />
+        <RadioGroup
+          required
+          name="options"
+          role="group"
+          options={groupedAnswers}
+        >
+          {groupedAnswers.map((answer) => (
+            <FormControlLabel
+              key={answer}
+              control={<Radio />}
+              label={answer}
+              value={answer}
+              onClick={(event) => {
+                handleAnswerSelection(
+                  event,
+                  questionData,
+                  groupedAnswers,
+                  correctAnswer,
+                  answers,
+                  setAnswers,
+                  setAnswerLength
+                );
+              }}
+            />
+          ))}
         </RadioGroup>
       </CardActions>
     </Card>
