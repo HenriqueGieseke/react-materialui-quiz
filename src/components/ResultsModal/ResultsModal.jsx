@@ -1,6 +1,5 @@
 import { Container, Typography, Card, Button } from '@material-ui/core';
-import React, { useContext } from 'react';
-import { Context } from '../../Context/Context';
+import React from 'react';
 import ResultsQuestionBox from '../ResultsQuestionBox/ResultsQuestionBox';
 import useStyles from './styles';
 
@@ -12,6 +11,7 @@ const ResultsModal = ({
   setAnswers,
 }) => {
   const classes = useStyles();
+  console.log(answers);
 
   return (
     <Container className={classes.modalContainer}>

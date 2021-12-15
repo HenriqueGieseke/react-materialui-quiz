@@ -9,20 +9,42 @@ const handleSubmitAnswers = (
 
   let correct = 0;
   let wrong = 0;
+
   answers.forEach((answer) => {
-    console.log('correct', answer.correctAnswer);
-    console.log('user', answer.userAnswer);
     if (answer.correctAnswer === answer.userAnswer) {
       correct++;
-      console.log('entrou correct ', correct);
     } else if (answer.correctAnswer !== answer.userAnswer) {
       wrong++;
-      console.log('entrou wrong ', wrong);
     }
   });
-  setAnswers([[...answers], { correct, wrong }]);
-  console.log(answers);
-  setModalToggle(!modalToggle);
+
+  const report = [[...answers], { correct, wrong }];
+
+  const quizReports = localStorage.getItem('quizReports');
+
+  if (quizReports === null) {
+    const reportObj = {
+      reports: [[[...answers], { correct, wrong }]],
+    };
+    localStorage.setItem('quizReports', JSON.stringify(reportObj));
+
+    console.log(JSON.parse(localStorage.getItem('quizReports')));
+    setAnswers(report);
+    setModalToggle(!modalToggle);
+  } else {
+    const reports = JSON.parse(localStorage.getItem('quizReports'));
+
+    const newReportObj = {
+      reports: [[[...answers], { correct, wrong }], ...reports.reports],
+    };
+
+    localStorage.setItem('quizReports', JSON.stringify(newReportObj));
+
+    console.log(answers);
+    console.log(JSON.parse(localStorage.getItem('quizReports')));
+    setAnswers(report);
+    setModalToggle(!modalToggle);
+  }
 };
 
 export { handleSubmitAnswers };

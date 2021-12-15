@@ -10,7 +10,7 @@ const ResultsQuestionBox = ({ answerData }) => {
     <Card align="start" variant="outlined" className={classes.card}>
       <CardContent>
         <Typography variant="body1" color="textSecondary" gutterBottom>
-          {answerData.description}
+          {answerData.description.replace(/&quot;/g, '"')}
         </Typography>
       </CardContent>
       <CardContent>

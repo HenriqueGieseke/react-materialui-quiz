@@ -11,7 +11,7 @@ function App() {
     <>
       <Context.Provider value={{ answers, setAnswers }}>
         <CssBaseline />
-        <Home />
+        <QuizReports />
       </Context.Provider>
     </>
   );

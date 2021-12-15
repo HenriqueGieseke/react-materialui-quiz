@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useContext } from 'react';
 import { Button, Container, Modal, Typography } from '@material-ui/core';
 import useStyles from './styles';
 import QuestionBox from '../QuestionBox/QuestionBox';
@@ -16,6 +16,11 @@ const QuizForm = ({ setShowQuiz, questions }) => {
   const [modalToggle, setModalToggle] = useState(false);
   const [questionsLength] = useState(questions.length);
   const [answerLength, setAnswerLength] = useState(0);
+
+  //localStorage.removeItem('quizReports');
+
+  const quizReports = JSON.parse(localStorage.getItem('quizReports'));
+  console.log('QUIZ REPORTS ', quizReports);
 
   console.log('CONTEXT ', answers);
 
