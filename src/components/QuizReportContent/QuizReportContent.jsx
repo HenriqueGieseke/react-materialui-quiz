@@ -1,4 +1,4 @@
-import { Container, Modal, Typography } from '@material-ui/core';
+import { Container, Modal, Typography, Button } from '@material-ui/core';
 import React, { useState } from 'react';
 import ResultsCard from '../ResultsCard/ResultsCard';
 import ResultsModal from '../ResultsModal/ResultsModal';
@@ -23,6 +23,19 @@ const QuizReportContent = () => {
       </Typography>
 
       <Container align="center">
+        {quizReports === null || quizReports.length === 0 ? null : (
+          <Button
+            onClick={() => {
+              localStorage.removeItem('quizReports');
+              window.location.reload(false);
+            }}
+            variant="contained"
+            color="primary"
+          >
+            Delete Results
+          </Button>
+        )}
+
         {quizReports === null || quizReports.length === 0 ? (
           <Typography color="textSecondary" align="center" variant="h6">
             No results available
