@@ -2,6 +2,7 @@ import React from 'react';
 import { Card, CardContent, Typography, Container } from '@material-ui/core';
 import KeyboardArrowLeftIcon from '@material-ui/icons/KeyboardArrowLeft';
 import useStyles from './styles';
+import { replaceCharacters } from '../../helpers/replaceCharacters';
 
 const ResultsQuestionBox = ({ answerData }) => {
   const classes = useStyles();
@@ -10,14 +11,14 @@ const ResultsQuestionBox = ({ answerData }) => {
     <Card align="start" variant="outlined" className={classes.card}>
       <CardContent>
         <Typography variant="body1" color="textSecondary" gutterBottom>
-          {answerData.description.replace(/&quot;/g, '"')}
+          {replaceCharacters(answerData.description)}
         </Typography>
       </CardContent>
       <CardContent>
         {answerData.answers.map((answer) => (
           <Container key={answer} className={classes.answerContainer}>
             <Typography gutterBottom variant="body2">
-              {answer}
+              {replaceCharacters(answer)}
             </Typography>
             {answer === answerData.userAnswer &&
             answer !== answerData.correctAnswer ? (

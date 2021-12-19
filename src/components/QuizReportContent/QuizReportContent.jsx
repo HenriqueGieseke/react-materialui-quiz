@@ -7,12 +7,10 @@ import useStyles from './styles';
 const QuizReportContent = () => {
   const classes = useStyles();
   const [modalStatus, setModalStatus] = useState(false);
-  const [quizReports, setQuizReports] = useState(
+  const [quizReports] = useState(
     JSON.parse(localStorage.getItem('quizReports'))
   );
   const [selectedReport, setSelectedReport] = useState([]);
-
-  console.log('QUIZ REPORTS ', quizReports);
 
   const modalToggle = () => {
     setModalStatus(!modalStatus);
@@ -25,14 +23,20 @@ const QuizReportContent = () => {
       </Typography>
 
       <Container align="center">
-        {quizReports.reports.map((report) => (
-          <ResultsCard
-            report={report}
-            key={report[0][0].description}
-            modalToggle={modalToggle}
-            setSelectedReport={setSelectedReport}
-          />
-        ))}
+        {quizReports === null || quizReports.length === 0 ? (
+          <Typography color="textSecondary" align="center" variant="h6">
+            No results available
+          </Typography>
+        ) : (
+          quizReports.reports.map((report) => (
+            <ResultsCard
+              report={report}
+              key={report[0][0].description}
+              modalToggle={modalToggle}
+              setSelectedReport={setSelectedReport}
+            />
+          ))
+        )}
       </Container>
       <Modal
         open={modalStatus}
@@ -40,7 +44,10 @@ const QuizReportContent = () => {
         className={classes.modal}
         align="center"
       >
-        <ResultsModal answers={selectedReport} />
+        <ResultsModal
+          setModalStatus={setModalStatus}
+          answers={selectedReport}
+        />
       </Modal>
     </main>
   );

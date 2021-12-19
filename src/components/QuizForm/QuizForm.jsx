@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import { Button, Container, Modal, Typography } from '@material-ui/core';
+import { Button, Container, Modal, Typography, Fade } from '@material-ui/core';
 import useStyles from './styles';
 import QuestionBox from '../QuestionBox/QuestionBox';
 import ResultsModal from '../ResultsModal/ResultsModal';
@@ -9,20 +9,11 @@ import { handleSubmitAnswers } from '../../helpers/handleSubmitAnswers';
 const QuizForm = ({ setShowQuiz, questions }) => {
   const classes = useStyles();
 
-  console.log('perguntas ', questions);
-
   const { answers, setAnswers } = useContext(Context);
 
   const [modalToggle, setModalToggle] = useState(false);
   const [questionsLength] = useState(questions.length);
   const [answerLength, setAnswerLength] = useState(0);
-
-  //localStorage.removeItem('quizReports');
-
-  const quizReports = JSON.parse(localStorage.getItem('quizReports'));
-  console.log('QUIZ REPORTS ', quizReports);
-
-  console.log('CONTEXT ', answers);
 
   return (
     <main>
@@ -30,49 +21,51 @@ const QuizForm = ({ setShowQuiz, questions }) => {
         Good Luck Have Fun
       </Typography>
 
-      <Container align="center">
-        <Button
-          onClick={() => {
-            setShowQuiz(false);
-            setAnswerLength(0);
-            setAnswers([]);
-          }}
-          className={classes.button}
-          variant="contained"
-          color="primary"
-        >
-          Cancel
-        </Button>
-        <form
-          onSubmit={(event) => {
-            handleSubmitAnswers(
-              event,
-              answers,
-              setAnswers,
-              setModalToggle,
-              modalToggle
-            );
-          }}
-        >
-          {questions.map((question) => (
-            <QuestionBox
-              key={question.question}
-              questionData={question}
-              questionNumber={questions.indexOf(question) + 1}
-              setAnswerLength={setAnswerLength}
-            />
-          ))}
+      <Fade in={true}>
+        <Container align="center">
           <Button
-            disabled={questionsLength === answerLength ? false : true}
-            type="submit"
+            onClick={() => {
+              setShowQuiz(false);
+              setAnswerLength(0);
+              setAnswers([]);
+            }}
             className={classes.button}
             variant="contained"
             color="primary"
           >
-            Finish
+            Cancel
           </Button>
-        </form>
-      </Container>
+          <form
+            onSubmit={(event) => {
+              handleSubmitAnswers(
+                event,
+                answers,
+                setAnswers,
+                setModalToggle,
+                modalToggle
+              );
+            }}
+          >
+            {questions.map((question) => (
+              <QuestionBox
+                key={question.question}
+                questionData={question}
+                questionNumber={questions.indexOf(question) + 1}
+                setAnswerLength={setAnswerLength}
+              />
+            ))}
+            <Button
+              disabled={questionsLength === answerLength ? false : true}
+              type="submit"
+              className={classes.button}
+              variant="contained"
+              color="primary"
+            >
+              Finish
+            </Button>
+          </form>
+        </Container>
+      </Fade>
       <Modal
         className={classes.modal}
         open={modalToggle}

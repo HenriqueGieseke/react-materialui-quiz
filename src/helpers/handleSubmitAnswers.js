@@ -28,7 +28,6 @@ const handleSubmitAnswers = (
     };
     localStorage.setItem('quizReports', JSON.stringify(reportObj));
 
-    console.log(JSON.parse(localStorage.getItem('quizReports')));
     setAnswers(report);
     setModalToggle(!modalToggle);
   } else {
@@ -40,8 +39,6 @@ const handleSubmitAnswers = (
 
     localStorage.setItem('quizReports', JSON.stringify(newReportObj));
 
-    console.log(answers);
-    console.log(JSON.parse(localStorage.getItem('quizReports')));
     setAnswers(report);
     setModalToggle(!modalToggle);
   }

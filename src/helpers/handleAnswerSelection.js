@@ -35,11 +35,9 @@ const handleAnswerSelection = (
     const arrayObj = answers[answerReportIndex];
     arrayObj.userAnswer = event.target.value;
     answerArray[answerReportIndex] = arrayObj;
-    console.log('inside question', answerArray.length);
-    setAnswerLength(answerArray.length);
 
+    setAnswerLength(answerArray.length);
     setAnswers(answerArray);
-    console.log('CONTEXT UPDATE ', answers);
   }
 };
 

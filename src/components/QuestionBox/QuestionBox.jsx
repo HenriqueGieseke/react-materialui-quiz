@@ -13,6 +13,7 @@ import useStyles from './styles';
 import { groupAnswers } from '../../helpers/groupAnswers';
 import { Context } from '../../Context/Context';
 import { handleAnswerSelection } from '../../helpers/handleAnswerSelection';
+import { replaceCharacters } from '../../helpers/replaceCharacters';
 
 const QuestionBox = ({ questionData, questionNumber, setAnswerLength }) => {
   const [correctAnswer] = useState(questionData.correct_answer);
@@ -30,7 +31,7 @@ const QuestionBox = ({ questionData, questionNumber, setAnswerLength }) => {
           Question {questionNumber}
         </Typography>
         <Typography color="textSecondary" gutterBottom>
-          {questionData.question}
+          {replaceCharacters(questionData.question)}
         </Typography>
       </CardContent>
       <CardActions>
@@ -44,8 +45,8 @@ const QuestionBox = ({ questionData, questionNumber, setAnswerLength }) => {
             <FormControlLabel
               key={answer}
               control={<Radio />}
-              label={answer}
-              value={answer}
+              label={replaceCharacters(answer)}
+              value={replaceCharacters(answer)}
               onClick={(event) => {
                 handleAnswerSelection(
                   event,

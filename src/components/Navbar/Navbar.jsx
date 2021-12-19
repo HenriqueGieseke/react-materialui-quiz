@@ -1,10 +1,13 @@
+import React from 'react';
+import { Link as RouterLink, useLocation } from 'react-router-dom';
 import { AppBar, Toolbar, Typography, Link } from '@material-ui/core';
 import ContactSupportIcon from '@material-ui/icons/ContactSupport';
-import React from 'react';
 import useStyles from './styles';
 
 const Navbar = () => {
   const classes = useStyles();
+
+  const location = useLocation().pathname;
 
   return (
     <AppBar position="relative">
@@ -15,9 +18,19 @@ const Navbar = () => {
             Nerd Quiz
           </Typography>
         </div>
-        <Link className={classes.link} to="#">
-          Quiz Results
-        </Link>
+        {location === '/' ? (
+          <Link
+            component={RouterLink}
+            className={classes.link}
+            to="/quizReports"
+          >
+            Quiz Results
+          </Link>
+        ) : (
+          <Link component={RouterLink} className={classes.link} to="/">
+            Home
+          </Link>
+        )}
       </Toolbar>
     </AppBar>
   );
